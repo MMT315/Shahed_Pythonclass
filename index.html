@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0a0a12">
+  <meta name="theme-color" content="#0d1219">
   <meta name="color-scheme" content="dark light">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="description" content="آرشیو کلاس‌های آموزشی پایتون؛ پخش و دریافت فایل‌های همراه">
-  <title>آرشیو کلاس‌ها | نسخه ۵ نئون</title>
+  <title>آرشیو کلاس‌ها | نسخه ۶</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -91,11 +91,9 @@
 
     .library-tools{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:12px;align-items:center;margin:0 0 22px;padding:14px;border:1px solid var(--surface-border);border-radius:18px;background:var(--surface);backdrop-filter:blur(18px)}
     .search-wrap{position:relative;min-width:0}.search-wrap input{width:100%;min-height:44px;padding:10px 42px 10px 14px;border:1px solid var(--surface-border);border-radius:12px;background:rgba(0,0,0,.12);color:var(--text-primary);font:inherit;font-size:13px;outline:none}
-    body[data-theme="dark"] #filterSelect{display:none}
-    body[data-theme="dark"] .library-tools{grid-template-columns:minmax(220px,1fr) auto}
-    body[data-theme="light"] .search-wrap input{background:rgba(255,255,255,.7)}.search-wrap input:focus{border-color:var(--accent-1);box-shadow:0 0 0 3px rgba(255,107,53,.12)}.search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);opacity:.65;pointer-events:none}.tool-select,.refresh-button{min-height:44px;border:1px solid var(--surface-border);border-radius:12px;background:var(--surface);color:var(--text-primary);padding:8px 12px;font:inherit;font-size:12px;cursor:pointer}.refresh-button:hover,.tool-select:focus-visible{border-color:var(--accent-1)}.refresh-button{display:inline-flex;align-items:center;gap:8px;justify-content:center}.refresh-button[disabled]{opacity:.55;cursor:wait}.result-line{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 14px;color:var(--text-secondary);font-size:12px}.result-line strong{color:var(--text-primary)}.empty-results{grid-column:1/-1;text-align:center;padding:44px 18px;border:1px dashed var(--surface-border);border-radius:18px;color:var(--text-secondary);line-height:2}.empty-results strong{display:block;color:var(--text-primary);font-size:15px;margin-bottom:6px}.skeleton-card{height:260px;border-radius:var(--radius);border:1px solid var(--surface-border);background:linear-gradient(100deg,var(--surface) 20%,rgba(255,255,255,.09) 40%,var(--surface) 60%);background-size:200% 100%;animation:shimmer 1.3s linear infinite}.connection-pill{display:none!important}
+    body[data-theme="light"] .search-wrap input{background:rgba(255,255,255,.7)}.search-wrap input:focus{border-color:var(--accent-1);box-shadow:0 0 0 3px rgba(255,107,53,.12)}.search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);opacity:.65;pointer-events:none}.refresh-button{min-height:44px;border:1px solid var(--surface-border);border-radius:12px;background:var(--surface);color:var(--text-primary);padding:8px 12px;font:inherit;font-size:12px;cursor:pointer}.refresh-button:hover{border-color:var(--accent-1)}.refresh-button{display:inline-flex;align-items:center;gap:8px;justify-content:center}.refresh-button[disabled]{opacity:.55;cursor:wait}.result-line{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 14px;color:var(--text-secondary);font-size:12px}.result-line strong{color:var(--text-primary)}.empty-results{grid-column:1/-1;text-align:center;padding:44px 18px;border:1px dashed var(--surface-border);border-radius:18px;color:var(--text-secondary);line-height:2}.empty-results strong{display:block;color:var(--text-primary);font-size:15px;margin-bottom:6px}.skeleton-card{height:260px;border-radius:var(--radius);border:1px solid var(--surface-border);background:linear-gradient(100deg,var(--surface) 20%,rgba(255,255,255,.09) 40%,var(--surface) 60%);background-size:200% 100%;animation:shimmer 1.3s linear infinite}.connection-pill{display:none!important}
     @keyframes shimmer{to{background-position:-200% 0}}.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-    @media(max-width:680px){.library-tools{grid-template-columns:1fr 1fr}.search-wrap{grid-column:1/-1}.tool-select,.refresh-button{width:100%}.result-line{align-items:flex-start;flex-direction:column;gap:4px}}
+    @media(max-width:680px){.library-tools{grid-template-columns:1fr auto}.search-wrap{grid-column:auto}.refresh-button{width:auto}.result-line{align-items:center;flex-direction:row;gap:4px}}
     @media(prefers-reduced-motion:reduce){.skeleton-card{animation:none}}
 
     footer{text-align:center;padding:42px 0 8px;color:var(--text-secondary);font-size:11px;font-weight:300}
@@ -122,16 +120,7 @@
       .modal-dialog{border-radius:17px}.modal-header{padding:13px}.modal-title{font-size:13px}.player-wrap{padding:10px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
-    /* نسخه ۵: چیدمان موبایل، تم‌های هماهنگ و پوسته نئون */
-    body[data-theme="neon"]{color-scheme:dark;--bg-1:#050711;--bg-2:#0b1022;--accent-1:#00f5ff;--accent-2:#ff35d3;
-      --accent-glow:rgba(0,245,255,.48);--surface:rgba(12,20,43,.72);--surface-border:rgba(0,245,255,.24);
-      --text-primary:#f2fbff;--text-secondary:rgba(211,235,255,.72);--card-shadow:0 16px 42px rgba(0,0,0,.38);
-      background:radial-gradient(ellipse at 5% 7%,rgba(0,245,255,.15),transparent 34%),radial-gradient(ellipse at 95% 8%,rgba(255,53,211,.15),transparent 32%),linear-gradient(135deg,var(--bg-1),var(--bg-2) 65%,#09051a)}
-    body[data-theme="neon"] h1{background-image:linear-gradient(100deg,#00f5ff 5%,#b45cff 52%,#ff35d3 92%);filter:drop-shadow(0 0 20px rgba(0,245,255,.22))}
-    body[data-theme="neon"] .theme-toggle,body[data-theme="neon"] .library-tools,body[data-theme="neon"] .video-card,body[data-theme="neon"] .stats-pill{box-shadow:0 0 0 1px rgba(0,245,255,.035),0 0 22px rgba(0,245,255,.055)}
-    body[data-theme="neon"] .video-card:not(.locked):hover{border-color:rgba(0,245,255,.75);box-shadow:0 16px 44px rgba(0,0,0,.4),0 0 25px rgba(0,245,255,.14)}
-    body[data-theme="neon"] .download-link::before{color:var(--accent-1)}
-    body[data-theme="light"] .thumbnail:before{background:linear-gradient(0deg,rgba(7,7,13,.72),transparent 72%)}
+    /* نسخه ۶: پوسته فشرده و حرفه‌ای با دو تم هماهنگ */
     .page-shell{width:100%;max-width:1240px;padding-left:clamp(12px,2.5vw,28px);padding-right:clamp(12px,2.5vw,28px)}
     .grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:clamp(12px,1.7vw,22px);align-items:stretch}
     .video-card{height:100%;min-width:0}
@@ -141,10 +130,8 @@
     .card-actions{display:flex;align-items:stretch;gap:8px;padding:0 14px 14px}
     .download-link{flex:1 1 100px;min-width:0;min-height:42px;padding:8px 9px;white-space:normal;text-align:center;line-height:1.55}
     .library-tools{grid-template-columns:minmax(0,1fr) auto auto;gap:10px;margin-bottom:18px}
-    body[data-theme="dark"] .library-tools{grid-template-columns:minmax(0,1fr) auto auto}
-    body[data-theme="dark"] #filterSelect{display:block}
     .search-wrap input{min-height:46px;font-size:14px}
-    .tool-select,.refresh-button{min-height:46px;white-space:nowrap}
+    .refresh-button{min-height:46px;white-space:nowrap}
     .refresh-button{padding-inline:13px}
     .status-message:not(.visible){display:none}
     @media(max-width:760px){
@@ -160,7 +147,6 @@
       .search-wrap input{min-height:44px;padding-right:38px;padding-left:8px;font-size:12px}
       .search-icon{right:12px}
       .refresh-button{grid-column:2;grid-row:1;width:auto;min-width:44px;min-height:44px;padding:8px 11px;font-size:11px}
-      .tool-select{grid-column:1/-1;grid-row:2;width:100%;min-height:40px;font-size:12px}
       .result-line{flex-direction:row;align-items:center;gap:8px;margin-bottom:10px;font-size:11px}
       .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
       .video-card{border-radius:15px}
@@ -187,12 +173,104 @@
       .refresh-button{font-size:10px;padding-inline:8px}
     }
     @media(prefers-reduced-motion:reduce){body::before{display:none}}
+
+    /* نسخه ۶ — رابط فشرده، متعادل و حرفه‌ای */
+    :root{
+      --bg-1:#0d1219;--bg-2:#131b25;--accent-1:#e8793f;--accent-2:#f1b85b;
+      --accent-glow:rgba(232,121,63,.22);--surface:rgba(24,33,44,.86);
+      --surface-border:rgba(190,205,220,.12);--text-primary:#edf1f5;
+      --text-secondary:rgba(218,226,235,.62);--card-shadow:0 8px 24px rgba(0,0,0,.20);--radius:13px;
+    }
+    body{background:radial-gradient(ellipse at 8% 0%,rgba(232,121,63,.075),transparent 32%),linear-gradient(145deg,#0d1219,#141c26 65%,#101720);background-attachment:fixed}
+    body[data-theme="light"]{
+      --bg-1:#f3f5f7;--bg-2:#e9edf1;--surface:rgba(255,255,255,.88);
+      --surface-border:rgba(35,49,64,.12);--text-primary:#202a35;--text-secondary:rgba(32,42,53,.62);
+      --card-shadow:0 7px 22px rgba(32,45,58,.075);
+      background:radial-gradient(ellipse at 8% 0%,rgba(232,121,63,.075),transparent 34%),linear-gradient(145deg,#f5f7f9,#e9edf1 70%,#eef1f4);
+    }
+    .page-shell{width:100%;max-width:1160px;padding:12px clamp(12px,2vw,22px) 28px}
+    .topbar{min-height:30px;gap:8px}
+    .theme-toggle{min-height:32px;padding:5px 10px;gap:7px;font-size:11px;border-radius:10px;box-shadow:none}
+    .hero{padding:13px 0 15px}
+    .eyebrow{font-size:10px;gap:7px;margin-bottom:6px}
+    .eyebrow:before,.eyebrow:after{width:17px}
+    h1{font-size:clamp(25px,3.3vw,36px);line-height:1.25;filter:none}
+    .hero p{margin:6px 0 10px;font-size:12px}
+    .stats-pill{gap:7px;padding:6px 11px;font-size:10px;backdrop-filter:blur(12px)}
+    .status-message{max-width:620px;margin:0 auto 12px;padding:10px 13px;border-radius:11px;font-size:11px;line-height:1.7}
+    .library-tools{grid-template-columns:minmax(0,1fr) auto;gap:8px;margin:0 0 11px;padding:8px;border-radius:13px;backdrop-filter:blur(12px)}
+    .search-wrap input{min-height:38px;padding:7px 36px 7px 10px;border-radius:9px;font-size:12px}
+    .search-icon{right:11px;font-size:17px}
+    .refresh-button{min-height:38px;padding:6px 11px;border-radius:9px;font-size:11px;gap:6px}
+    .result-line{margin:0 2px 9px;font-size:10px}
+    .grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:13px;align-items:stretch}
+    .video-card{border-radius:13px;box-shadow:var(--card-shadow);backdrop-filter:blur(12px)}
+    .video-card:not(.locked):hover{transform:translateY(-3px);border-color:rgba(232,121,63,.38);box-shadow:0 12px 26px rgba(0,0,0,.16)}
+    .thumbnail{aspect-ratio:16/9}
+    .thumbnail:after{width:112px;height:112px;box-shadow:0 0 0 15px rgba(247,197,72,.018),0 0 0 31px rgba(255,107,53,.018)}
+    .play-button{width:39px;height:39px;box-shadow:0 5px 16px rgba(232,121,63,.28);background:#e8793f}
+    .play-glyph{border-top-width:7px;border-bottom-width:7px;border-left-width:11px;transform:translateX(1px)}
+    .number-badge,.locked-badge{top:8px;font-size:9px;padding:3px 7px}
+    .number-badge{right:8px}.locked-badge{left:8px}
+    .card-body{padding:8px 10px 7px;min-height:53px}
+    .card-title{font-size:12px;line-height:1.65;margin:0 0 2px}
+    .card-subtitle{font-size:9.5px;line-height:1.55}
+    .card-actions{display:flex;align-items:center;gap:6px;padding:0 9px 9px;margin-top:auto}
+    .download-link{flex:1 1 0;min-width:0;min-height:31px;padding:5px 6px;gap:4px;border-radius:8px;font-size:9.5px;line-height:1.35;white-space:normal;text-align:center;overflow-wrap:anywhere}
+    .download-link::before{font-size:12px}
+    .skeleton-card{height:auto;aspect-ratio:1.45;border-radius:13px}
+    .empty-results{padding:28px 14px;border-radius:13px;font-size:11px}
+    footer{padding:24px 0 4px;font-size:10px}
+    .modal{padding:16px}.modal-dialog{width:min(860px,100%);border-radius:16px}
+    .modal-header{padding:11px 14px}.modal-title{font-size:13px}.close-button{width:32px;height:32px;border-radius:9px;font-size:19px}
+    .player-wrap{padding:12px}.player-note{font-size:10px}
+    body[data-theme="light"] .video-card{background:rgba(255,255,255,.92)}
+    body[data-theme="light"] .library-tools{background:rgba(255,255,255,.82)}
+    body[data-theme="light"] .search-wrap input{background:#f7f9fb;border-color:#dce2e8}
+    body[data-theme="light"] .download-link{background:#f6f8fa;border-color:#dce2e8}
+    body[data-theme="light"] .download-link:hover{background:rgba(232,121,63,.08);border-color:rgba(232,121,63,.38)}
+    body[data-theme="light"] .modal-dialog{background:#f7f9fb;border-color:#dce2e8}
+    body[data-theme="light"] .theme-toggle:hover,body[data-theme="light"] .video-card:not(.locked):hover{box-shadow:0 10px 24px rgba(32,45,58,.11)}
+    @media(min-width:1100px){.grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}}
+    @media(min-width:820px) and (max-width:1099px){.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}}
+    @media(min-width:620px) and (max-width:819px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}}
+    @media(max-width:619px){
+      .page-shell{padding:8px 9px 20px}
+      .topbar{min-height:28px}
+      .theme-toggle{min-height:30px;padding:4px 9px;font-size:10px}
+      .hero{padding:10px 0 12px}
+      h1{font-size:25px}
+      .eyebrow{font-size:9px;margin-bottom:5px}
+      .stats-pill{padding:5px 9px;font-size:9px;gap:5px}
+      .library-tools{grid-template-columns:minmax(0,1fr) auto;gap:6px;padding:6px;margin-bottom:9px;border-radius:11px}
+      .search-wrap input{min-height:36px;padding-right:32px;font-size:11px}
+      .search-icon{right:9px}
+      .refresh-button{min-height:36px;padding:5px 8px;font-size:10px}
+      .result-line{flex-direction:row;align-items:center;margin-bottom:7px;font-size:9px}
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+      .video-card{border-radius:11px}
+      .thumbnail:after{width:78px;height:78px;box-shadow:0 0 0 10px rgba(247,197,72,.018),0 0 0 21px rgba(255,107,53,.018)}
+      .play-button{width:33px;height:33px}
+      .play-glyph{border-top-width:6px;border-bottom-width:6px;border-left-width:9px}
+      .number-badge,.locked-badge{top:6px;padding:2px 6px;font-size:8px}
+      .number-badge{right:6px}.locked-badge{left:6px}
+      .card-body{padding:6px 7px 5px;min-height:44px}
+      .card-title{font-size:10.5px;line-height:1.55;margin-bottom:1px}
+      .card-subtitle{font-size:8px;line-height:1.45}
+      .card-actions{gap:4px;padding:0 6px 6px}
+      .download-link{min-height:28px;padding:4px 3px;font-size:8px;gap:3px;border-radius:7px}
+      .download-link::before{font-size:10px}
+      footer{padding-top:17px}
+      .modal{padding:7px}.player-wrap{padding:8px}
+    }
+    @media(max-width:350px){.grid{gap:6px}.card-title{font-size:10px}.card-subtitle{font-size:7.5px}.download-link{font-size:7.5px}}
+    @media(prefers-reduced-motion:reduce){.video-card,.theme-toggle,.download-link{transition:none!important}}
   </style>
 </head>
 <body>
   <div class="page-shell">
     <div class="topbar">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="تغییر تم صفحه"><span id="themeIcon" aria-hidden="true">☼</span><span id="themeLabel">تم نئون</span></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="تغییر تم صفحه"><span id="themeIcon" aria-hidden="true">☼</span><span id="themeLabel">تم روشن</span></button>
     </div>
     <header class="hero">
       <div class="eyebrow">کتابخانه ویدیویی آموزشی</div>
@@ -206,7 +284,6 @@
       <div class="status-message visible" id="statusMessage" role="status" aria-live="polite">در حال دریافت فهرست کلاس‌ها…</div>
       <section class="library-tools" aria-label="ابزارهای جستجو و مرتب‌سازی">
         <label class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><span class="sr-only">جستجوی کلاس</span><input id="searchInput" type="search" inputmode="numeric" autocomplete="off" placeholder="جستجوی شماره کلاس…" aria-label="جستجوی شماره کلاس"></label>
-        <label><span class="sr-only">فیلتر کلاس‌ها</span><select class="tool-select" id="filterSelect" aria-label="فیلتر کلاس‌ها"><option value="all">همه کلاس‌ها</option><option value="python">دارای فایل پایتون</option></select></label>
         <button class="refresh-button" id="refreshButton" type="button"><span aria-hidden="true">↻</span> به‌روزرسانی</button>
       </section>
       <div class="result-line"><span id="resultSummary" aria-live="polite">در حال آماده‌سازی…</span><span class="connection-pill" id="sourceStatus" aria-hidden="true"></span></div>
@@ -244,7 +321,7 @@
     const statusMessage = $("statusMessage"), modal = $("playerModal"), modalTitle = $("modalTitle");
     const videoPlayer = $("videoPlayer"), playerError = $("playerError"), closeModalButton = $("closeModal");
     const themeToggle = $("themeToggle"), themeIcon = $("themeIcon"), themeLabel = $("themeLabel");
-    const searchInput = $("searchInput"), filterSelect = $("filterSelect"), refreshButton = $("refreshButton");
+    const searchInput = $("searchInput"), refreshButton = $("refreshButton");
     const resultSummary = $("resultSummary"), sourceStatus = $("sourceStatus");
     const faNumber = (value) => new Intl.NumberFormat("fa-IR").format(value);
     const fileUrl = (num) => `${PAGES_BASE}class_${num}.mp4`;
@@ -310,17 +387,16 @@
     }
     function renderCards() {
       const query = searchInput.value.trim().replace(/[۰-۹]/g, d => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d))).replace(/[٠-٩]/g, d => String("٠١٢٣٤٥٦٧٨٩".indexOf(d)));
-      const filter = filterSelect.value;
-      const videos = repositoryData.videos.filter(num => (!query || String(num).includes(query)) && (filter !== "python" || repositoryData.pythonFiles.includes(num)));
+      const videos = repositoryData.videos.filter(num => !query || String(num).includes(query));
       videoGrid.replaceChildren();
       if (!videos.length) {
         const empty = document.createElement("div"); empty.className = "empty-results";
         const strong = document.createElement("strong"); strong.textContent = repositoryData.videos.length ? "کلاسی پیدا نشد" : "هنوز ویدیویی در مخزن پیدا نشد";
-        const detail = document.createElement("span"); detail.textContent = repositoryData.videos.length ? "عبارت جستجو یا فیلتر را تغییر بده." : "نام فایل‌ها باید مانند class_1.mp4 باشد.";
+        const detail = document.createElement("span"); detail.textContent = repositoryData.videos.length ? "شماره کلاس دیگری را جستجو کن." : "نام فایل‌ها باید مانند class_1.mp4 باشد.";
         empty.append(strong, detail); videoGrid.appendChild(empty);
       } else {
         videos.forEach((num, index) => videoGrid.appendChild(createCard(num, index, repositoryData.pythonFiles.includes(num))));
-        if (!query && filter === "all") {
+        if (!query) {
           const lastNum = repositoryData.videos[repositoryData.videos.length - 1];
           if (lastNum < MAX_CLASS) videoGrid.appendChild(createLockedCard(lastNum + 1, videos.length));
         }
@@ -404,19 +480,19 @@
       }
     });
     function applyTheme(theme) {
-      const normalized = ["dark", "light", "neon"].includes(theme) ? theme : "dark";
+      const normalized = theme === "light" ? "light" : "dark";
       document.body.dataset.theme = normalized;
-      const next = normalized === "dark" ? "light" : normalized === "light" ? "neon" : "dark";
-      themeIcon.textContent = normalized === "light" ? "☾" : normalized === "neon" ? "✦" : "☼";
-      themeLabel.textContent = normalized === "dark" ? "تم روشن" : normalized === "light" ? "تم نئون" : "تم تاریک";
-      themeToggle.setAttribute("aria-label", `فعال‌کردن ${next === "light" ? "تم روشن" : next === "neon" ? "تم نئون" : "تم تاریک"}`);
+      const next = normalized === "dark" ? "light" : "dark";
+      themeIcon.textContent = next === "light" ? "☼" : "☾";
+      themeLabel.textContent = next === "light" ? "تم روشن" : "تم تاریک";
+      themeToggle.setAttribute("aria-label", `فعال‌کردن ${next === "light" ? "تم روشن" : "تم تاریک"}`);
       const metaTheme = document.querySelector('meta[name="theme-color"]');
-      if (metaTheme) metaTheme.setAttribute("content", normalized === "light" ? "#f3f0ea" : normalized === "neon" ? "#050711" : "#0a0a12");
+      if (metaTheme) metaTheme.setAttribute("content", normalized === "light" ? "#f3f5f7" : "#0d1219");
     }
     let savedTheme = "dark"; try { savedTheme = localStorage.getItem("classArchiveTheme") || "dark"; } catch (_) {}
     applyTheme(savedTheme);
-    themeToggle.addEventListener("click", () => { const current = document.body.dataset.theme; const next = current === "dark" ? "light" : current === "light" ? "neon" : "dark"; applyTheme(next); try { localStorage.setItem("classArchiveTheme", next); } catch (_) {} });
-    searchInput.addEventListener("input", renderCards); filterSelect.addEventListener("change", renderCards); refreshButton.addEventListener("click", () => init({ force: true }));
+    themeToggle.addEventListener("click", () => { const next = document.body.dataset.theme === "dark" ? "light" : "dark"; applyTheme(next); try { localStorage.setItem("classArchiveTheme", next); } catch (_) {} });
+    searchInput.addEventListener("input", renderCards); refreshButton.addEventListener("click", () => init({ force: true }));
     init().catch(() => { showStatus("بارگذاری فهرست ناموفق بود. دوباره تلاش کن."); setLoading(false); });
   </script>
 </body>
