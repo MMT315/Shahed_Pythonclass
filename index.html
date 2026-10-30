@@ -52,33 +52,34 @@
     .status-message{display:none;margin:0 auto 25px;max-width:650px;padding:17px 20px;border-radius:16px;border:1px solid var(--surface-border);
       background:var(--surface);color:var(--text-secondary);text-align:center;line-height:1.9;font-size:13px}
     .status-message.visible{display:block}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px}
-    .video-card{min-width:0;overflow:hidden;border-radius:var(--radius);border:1px solid var(--surface-border);background:var(--surface);
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));grid-auto-rows:1fr;align-items:stretch;gap:22px}
+    .video-card{display:flex;flex-direction:column;min-width:0;overflow:hidden;border-radius:var(--radius);border:1px solid var(--surface-border);background:var(--surface);
       box-shadow:var(--card-shadow);cursor:pointer;text-align:right;color:inherit;padding:0;position:relative;isolation:isolate;
       backdrop-filter:blur(20px) saturate(140%);transition:transform .28s,border-color .28s,box-shadow .28s,background .28s;
       animation:fadeUp .55s both;animation-delay:var(--delay,0ms)}
     .video-card:not(.locked):hover{transform:translateY(-6px);border-color:rgba(255,107,53,.58);box-shadow:0 22px 58px rgba(0,0,0,.34),0 0 26px rgba(255,107,53,.12)}
-    .thumbnail{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    .thumbnail{position:relative;aspect-ratio:16/9;flex:0 0 auto;width:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;
       background:radial-gradient(ellipse at 50% 45%,rgba(255,107,53,.18),transparent 44%),linear-gradient(135deg,#242238,#11111d 58%,#38251f)}
+    .thumbnail-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0}
     .thumbnail:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,7,13,.83),transparent 72%);z-index:1}
     .thumbnail:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(247,197,72,.12);
       box-shadow:0 0 0 22px rgba(247,197,72,.025),0 0 0 48px rgba(255,107,53,.025);pointer-events:none}
     /* دکمه پخش با مرکزیت دقیق مستقل از جهت RTL */
-    .play-button{position:absolute;left:50%;top:50%;z-index:2;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-      transform:translate(-50%,-50%);background:linear-gradient(135deg,var(--accent-2),var(--accent-1));color:#17111a;
-      box-shadow:0 8px 28px rgba(255,107,53,.3),inset 0 1px 1px rgba(255,255,255,.5);transition:transform .25s;font-size:19px;line-height:1;padding:0}
-    .play-glyph{display:block;transform:translateX(-1px);line-height:1}
+    .play-button{position:absolute;left:50%;top:50%;z-index:2;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;
+      transform:translate(-50%,-50%);background:#ff6b35;color:#fff;
+      box-shadow:0 8px 28px rgba(255,107,53,.42),inset 0 1px 1px rgba(255,255,255,.28);transition:transform .25s;padding:0}
+    .play-glyph{display:block;width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:14px solid #fff;transform:translateX(2px);line-height:0;font-size:0}
     .video-card:not(.locked):hover .play-button{transform:translate(-50%,-50%) scale(1.12)}
     .number-badge,.locked-badge{position:absolute;z-index:3;top:12px;font-size:11px;padding:5px 9px;border-radius:999px;backdrop-filter:blur(10px)}
     .number-badge{right:12px;background:rgba(7,7,13,.62);color:#fff;border:1px solid rgba(255,255,255,.12);direction:ltr}
     .locked-badge{left:12px;color:#ffc19f;border:1px solid rgba(255,107,53,.45);background:rgba(20,13,17,.76)}
-    .card-body{padding:17px 18px 19px}.card-title{margin:0 0 5px;font-size:15px;font-weight:600;color:var(--text-primary)}
+    .card-body{padding:17px 18px 19px;flex:1;min-height:83px}.card-title{margin:0 0 5px;font-size:15px;font-weight:600;color:var(--text-primary)}
     .card-subtitle{margin:0;font-size:12px;color:var(--text-secondary);font-weight:300;direction:rtl;text-align:right}
 
     .video-card{cursor:default}
-    .video-card-trigger{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;text-align:right;cursor:pointer;border-radius:inherit;overflow:hidden}
+    .video-card-trigger{display:flex;flex-direction:column;flex:1;width:100%;padding:0;border:0;background:transparent;color:inherit;text-align:right;cursor:pointer;border-radius:inherit;overflow:hidden}
     .video-card-trigger:focus-visible{outline:2px solid var(--accent-2);outline-offset:-4px}
-    .card-actions{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
+    .card-actions{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px;margin-top:auto}
     .download-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:7px 11px;border:1px solid var(--surface-border);border-radius:10px;background:rgba(255,255,255,.035);color:var(--text-primary);font-size:11px;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
     .download-link::before{content:"↓";font-size:14px;color:var(--accent-2)}
     .download-link:hover{background:rgba(255,107,53,.11);border-color:rgba(255,107,53,.5);transform:translateY(-1px)}
@@ -90,7 +91,9 @@
 
     .library-tools{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:12px;align-items:center;margin:0 0 22px;padding:14px;border:1px solid var(--surface-border);border-radius:18px;background:var(--surface);backdrop-filter:blur(18px)}
     .search-wrap{position:relative;min-width:0}.search-wrap input{width:100%;min-height:44px;padding:10px 42px 10px 14px;border:1px solid var(--surface-border);border-radius:12px;background:rgba(0,0,0,.12);color:var(--text-primary);font:inherit;font-size:13px;outline:none}
-    body[data-theme="light"] .search-wrap input{background:rgba(255,255,255,.7)}.search-wrap input:focus{border-color:var(--accent-1);box-shadow:0 0 0 3px rgba(255,107,53,.12)}.search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);opacity:.65;pointer-events:none}.tool-select,.refresh-button{min-height:44px;border:1px solid var(--surface-border);border-radius:12px;background:var(--surface);color:var(--text-primary);padding:8px 12px;font:inherit;font-size:12px;cursor:pointer}.refresh-button:hover,.tool-select:focus-visible{border-color:var(--accent-1)}.refresh-button{display:inline-flex;align-items:center;gap:8px;justify-content:center}.refresh-button[disabled]{opacity:.55;cursor:wait}.result-line{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 14px;color:var(--text-secondary);font-size:12px}.result-line strong{color:var(--text-primary)}.empty-results{grid-column:1/-1;text-align:center;padding:44px 18px;border:1px dashed var(--surface-border);border-radius:18px;color:var(--text-secondary);line-height:2}.empty-results strong{display:block;color:var(--text-primary);font-size:15px;margin-bottom:6px}.skeleton-card{height:260px;border-radius:var(--radius);border:1px solid var(--surface-border);background:linear-gradient(100deg,var(--surface) 20%,rgba(255,255,255,.09) 40%,var(--surface) 60%);background-size:200% 100%;animation:shimmer 1.3s linear infinite}.connection-pill{display:inline-flex;align-items:center;gap:6px}.connection-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:#65d6a0;box-shadow:0 0 9px rgba(101,214,160,.5)}
+    body[data-theme="dark"] #filterSelect{display:none}
+    body[data-theme="dark"] .library-tools{grid-template-columns:minmax(220px,1fr) auto}
+    body[data-theme="light"] .search-wrap input{background:rgba(255,255,255,.7)}.search-wrap input:focus{border-color:var(--accent-1);box-shadow:0 0 0 3px rgba(255,107,53,.12)}.search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);opacity:.65;pointer-events:none}.tool-select,.refresh-button{min-height:44px;border:1px solid var(--surface-border);border-radius:12px;background:var(--surface);color:var(--text-primary);padding:8px 12px;font:inherit;font-size:12px;cursor:pointer}.refresh-button:hover,.tool-select:focus-visible{border-color:var(--accent-1)}.refresh-button{display:inline-flex;align-items:center;gap:8px;justify-content:center}.refresh-button[disabled]{opacity:.55;cursor:wait}.result-line{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 14px;color:var(--text-secondary);font-size:12px}.result-line strong{color:var(--text-primary)}.empty-results{grid-column:1/-1;text-align:center;padding:44px 18px;border:1px dashed var(--surface-border);border-radius:18px;color:var(--text-secondary);line-height:2}.empty-results strong{display:block;color:var(--text-primary);font-size:15px;margin-bottom:6px}.skeleton-card{height:260px;border-radius:var(--radius);border:1px solid var(--surface-border);background:linear-gradient(100deg,var(--surface) 20%,rgba(255,255,255,.09) 40%,var(--surface) 60%);background-size:200% 100%;animation:shimmer 1.3s linear infinite}.connection-pill{display:none!important}
     @keyframes shimmer{to{background-position:-200% 0}}.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
     @media(max-width:680px){.library-tools{grid-template-columns:1fr 1fr}.search-wrap{grid-column:1/-1}.tool-select,.refresh-button{width:100%}.result-line{align-items:flex-start;flex-direction:column;gap:4px}}
     @media(prefers-reduced-motion:reduce){.skeleton-card{animation:none}}
@@ -128,7 +131,6 @@
     <header class="hero">
       <div class="eyebrow">کتابخانه ویدیویی آموزشی</div>
       <h1>آرشیو کلاس‌ها</h1>
-      <p>ویدیوها مستقیماً از مخزن آموزشی بارگذاری می‌شوند</p>
       <div class="stats-pill" aria-live="polite"><span class="stats-dot" aria-hidden="true"></span>
         <span>تعداد فیلم‌های موجود: <strong id="videoCount">۰</strong></span><span aria-hidden="true">—</span>
         <span>آخرین شماره: <strong id="lastNumber">۰</strong></span>
@@ -141,7 +143,7 @@
         <label><span class="sr-only">فیلتر کلاس‌ها</span><select class="tool-select" id="filterSelect" aria-label="فیلتر کلاس‌ها"><option value="all">همه کلاس‌ها</option><option value="python">دارای فایل پایتون</option></select></label>
         <button class="refresh-button" id="refreshButton" type="button"><span aria-hidden="true">↻</span> به‌روزرسانی</button>
       </section>
-      <div class="result-line"><span id="resultSummary" aria-live="polite">در حال آماده‌سازی…</span><span class="connection-pill" id="sourceStatus">اتصال به مخزن</span></div>
+      <div class="result-line"><span id="resultSummary" aria-live="polite">در حال آماده‌سازی…</span><span class="connection-pill" id="sourceStatus" aria-hidden="true"></span></div>
       <section class="grid" id="videoGrid" aria-label="فهرست کلاس‌های موجود"></section>
     </main>
     <footer>آرشیو کلاس‌ها <span aria-hidden="true">·</span> فضای یادگیری شما</footer>
@@ -165,10 +167,12 @@
     const MAX_CLASS = 70;
     const REPO_API = "https://api.github.com/repos/mmt315/PythonClassData/contents/";
     const PAGES_BASE = "https://mmt315.github.io/PythonClassData/";
+    const RAW_BASE = "https://raw.githubusercontent.com/mmt315/PythonClassData/main/";
     // پس از استقرار Worker کلادفلر، آدرس آن را اینجا بگذارید؛ در غیر این صورت API عمومی GitHub استفاده می‌شود.
     const API_BASE = "https://py-class.game-m-m-t-s0.workers.dev";
     const CACHE_KEY = "classArchiveRepositoryCacheV3";
-    const CACHE_TTL = 5 * 60 * 1000;
+    const CACHE_TTL = 24 * 60 * 60 * 1000;
+    const THUMBNAIL_EXTENSIONS = ["webp", "jpg", "jpeg", "png", "avif", "gif"];
     const $ = (id) => document.getElementById(id);
     const videoGrid = $("videoGrid"), videoCount = $("videoCount"), lastNumber = $("lastNumber");
     const statusMessage = $("statusMessage"), modal = $("playerModal"), modalTitle = $("modalTitle");
@@ -179,7 +183,7 @@
     const faNumber = (value) => new Intl.NumberFormat("fa-IR").format(value);
     const fileUrl = (num) => `${PAGES_BASE}class_${num}.mp4`;
     const pythonUrl = (num) => `${PAGES_BASE}class_${num}.py`;
-    let repositoryData = { videos: [], pythonFiles: [] };
+    let repositoryData = { videos: [], pythonFiles: [], thumbnails: {} };
     let lastFocusedElement = null;
     let requestController = null;
 
@@ -208,6 +212,8 @@
       const trigger = document.createElement("button"); trigger.type = "button"; trigger.className = "video-card-trigger";
       trigger.setAttribute("aria-label", `پخش کلاس شماره ${faNumber(num)}`);
       const thumbnail = document.createElement("div"); thumbnail.className = "thumbnail";
+      const imageName = repositoryData.thumbnails && repositoryData.thumbnails[num];
+      if (imageName) { const image = document.createElement("img"); image.className = "thumbnail-image"; image.src = `${RAW_BASE}${encodeURIComponent(imageName)}`; image.alt = `تصویر کلاس ${faNumber(num)}`; image.loading = "lazy"; image.decoding = "async"; image.fetchPriority = "low"; image.addEventListener("error", () => image.remove(), { once: true }); thumbnail.appendChild(image); }
       const badge = document.createElement("span"); badge.className = "number-badge"; badge.textContent = `#${faNumber(num)}`;
       const play = document.createElement("span"); play.className = "play-button"; play.setAttribute("aria-hidden", "true");
       const glyph = document.createElement("span"); glyph.className = "play-glyph"; glyph.textContent = "▶"; play.appendChild(glyph);
@@ -267,48 +273,46 @@
     async function fetchRepositoryFiles() {
       let data;
       if (API_BASE) {
-        const response = await fetchWithTimeout(`${API_BASE.replace(/\/$/, "")}/api/classes`, { headers: { "Accept": "application/json" }, cache: "no-cache" });
+        const response = await fetchWithTimeout(`${API_BASE.replace(/\/$/, "")}/api/classes`, { headers: { "Accept": "application/json" }, cache: "default" }, 8000);
         if (!response.ok) throw new Error(response.status === 429 ? "rate-limit" : "repository-unavailable");
         data = await response.json();
         if (!data || !Array.isArray(data.videos) || !Array.isArray(data.pythonFiles)) throw new Error("invalid-response");
-        return { videos: data.videos.filter(n => Number.isInteger(n) && n >= 1 && n <= MAX_CLASS).sort((a,b)=>a-b), pythonFiles: data.pythonFiles.filter(n => Number.isInteger(n) && n >= 1 && n <= MAX_CLASS).sort((a,b)=>a-b) };
+        return { videos: data.videos.filter(n => Number.isInteger(n) && n >= 1 && n <= MAX_CLASS).sort((a,b)=>a-b), pythonFiles: data.pythonFiles.filter(n => Number.isInteger(n) && n >= 1 && n <= MAX_CLASS).sort((a,b)=>a-b), thumbnails: data.thumbnails && typeof data.thumbnails === "object" ? data.thumbnails : {} };
       }
       const response = await fetchWithTimeout(REPO_API, { headers: { "Accept": "application/vnd.github+json" }, cache: "no-cache" });
       if (!response.ok) throw new Error(response.status === 403 || response.status === 429 ? "rate-limit" : "repository-unavailable");
       data = await response.json(); if (!Array.isArray(data)) throw new Error("invalid-response");
-      const videos = new Set(), pythonFiles = new Set();
+      const videos = new Set(), pythonFiles = new Set(), thumbnails = {};
       for (const item of data) {
         if (!item || item.type !== "file" || typeof item.name !== "string") continue;
-        const match = /^class_(\d{1,2})\.(mp4|py)$/i.exec(item.name); if (!match) continue;
+        const match = /^class_(\d{1,2})\.(mp4|py|webp|jpe?g|png|avif|gif)$/i.exec(item.name); if (!match) continue;
         const num = Number(match[1]); if (!Number.isInteger(num) || num < 1 || num > MAX_CLASS) continue;
-        (match[2].toLowerCase() === "mp4" ? videos : pythonFiles).add(num);
+        const ext = match[2].toLowerCase();
+        if (ext === "mp4") videos.add(num); else if (ext === "py") pythonFiles.add(num); else if (!thumbnails[num] || THUMBNAIL_EXTENSIONS.indexOf(ext) < THUMBNAIL_EXTENSIONS.indexOf(thumbnails[num].split(".").pop().toLowerCase())) thumbnails[num] = item.name;
       }
-      return { videos: [...videos].sort((a,b)=>a-b), pythonFiles: [...pythonFiles].sort((a,b)=>a-b) };
+      return { videos: [...videos].sort((a,b)=>a-b), pythonFiles: [...pythonFiles].sort((a,b)=>a-b), thumbnails };
     }
     async function init({ force = false } = {}) {
-      if (requestController) requestController.abort();
-      setLoading(true); showStatus("در حال دریافت فهرست کلاس‌ها…"); sourceStatus.textContent = "در حال اتصال";
-      if (!repositoryData.videos.length) renderSkeletons();
-      if (!force) {
-        const cached = readCache();
-        if (cached) { repositoryData = { videos: cached.videos, pythonFiles: cached.pythonFiles }; updateStats(); renderCards(); showStatus("فهرست ذخیره‌شده نمایش داده شد؛ در حال بررسی به‌روزرسانی…"); }
-      }
+      setLoading(true);
+      const cached = readCache();
+      if (!force && cached) { repositoryData = { videos: cached.videos, pythonFiles: cached.pythonFiles, thumbnails: cached.thumbnails || {} }; updateStats(); renderCards(); showStatus("", false); }
+      else if (!repositoryData.videos.length) { showStatus("در حال دریافت فهرست کلاس‌ها…"); renderSkeletons(); }
       try {
         const data = await fetchRepositoryFiles(); repositoryData = data; saveCache(data); updateStats(); renderCards();
-        showStatus("فهرست کلاس‌ها با موفقیت به‌روز شد.", false); sourceStatus.textContent = API_BASE ? "اتصال پایدار · Worker" : "اتصال مستقیم به مخزن";
+        showStatus("", false);
       } catch (error) {
-        const cached = readCache();
-        if (!repositoryData.videos.length && cached) { repositoryData = { videos: cached.videos, pythonFiles: cached.pythonFiles }; updateStats(); renderCards(); }
+        const fallback = readCache();
+        if (!repositoryData.videos.length && fallback) { repositoryData = { videos: fallback.videos, pythonFiles: fallback.pythonFiles, thumbnails: fallback.thumbnails || {} }; updateStats(); renderCards(); }
         const message = error?.message === "rate-limit" ? "محدودیت موقت درخواست‌های GitHub فعال شده؛ فهرست ذخیره‌شده در صورت وجود نمایش داده می‌شود." : "دریافت فهرست از مخزن ممکن نشد؛ اتصال اینترنت و عمومی بودن مخزن را بررسی کن.";
-        showStatus(message); sourceStatus.textContent = cached ? "حالت ذخیره‌شده" : "قطع اتصال";
+        if (!repositoryData.videos.length) showStatus(message); else showStatus("", false);
         const retry = document.createElement("button"); retry.type = "button"; retry.className = "retry-button"; retry.textContent = "تلاش دوباره"; retry.addEventListener("click", () => init({ force: true })); statusMessage.append(document.createElement("br"), retry);
       } finally { setLoading(false); }
     }
     function updateStats() { videoCount.textContent = faNumber(repositoryData.videos.length); lastNumber.textContent = faNumber(repositoryData.videos.length ? repositoryData.videos[repositoryData.videos.length - 1] : 0); }
     function openPlayer(num) {
       lastFocusedElement = document.activeElement; playerError.textContent = ""; playerError.classList.remove("visible");
-      modalTitle.textContent = `کلاس شماره ${faNumber(num)}`; videoPlayer.pause(); videoPlayer.removeAttribute("src"); videoPlayer.load();
-      videoPlayer.src = fileUrl(num); videoPlayer.load(); modal.classList.add("active"); modal.setAttribute("aria-hidden", "false");
+      modalTitle.textContent = `کلاس شماره ${faNumber(num)}`; videoPlayer.pause(); videoPlayer.removeAttribute("src");
+      videoPlayer.preload = "metadata"; videoPlayer.src = fileUrl(num); modal.classList.add("active"); videoPlayer.load(); modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden"; closeModalButton.focus();
       const playPromise = videoPlayer.play(); if (playPromise?.catch) playPromise.catch(() => {});
     }
