@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0a12">
+  <meta name="color-scheme" content="dark light">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="description" content="آرشیو کلاس‌های آموزشی پایتون؛ پخش و دریافت فایل‌های همراه">
+  <title>آرشیو کلاس‌ها | نسخه ۳</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg-1:#0a0a12; --bg-2:#12121f; --accent-1:#ff6b35; --accent-2:#f7c548;
+      --accent-glow:rgba(255,107,53,.45); --surface:rgba(255,255,255,.045);
+      --surface-border:rgba(255,255,255,.09); --text-primary:#f5f3ef;
+      --text-secondary:rgba(245,243,239,.58); --card-shadow:0 18px 48px rgba(0,0,0,.28);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    html{min-height:100%;scroll-behavior:smooth}
+    body{min-height:100vh;margin:0;color:var(--text-primary);font-family:"Vazirmatn",Tahoma,sans-serif;overflow-x:hidden;
+      background:radial-gradient(ellipse at 8% 10%,rgba(255,107,53,.13),transparent 35%),
+      radial-gradient(ellipse at 92% 4%,rgba(247,197,72,.10),transparent 31%),
+      radial-gradient(ellipse at 55% 100%,rgba(90,62,150,.12),transparent 38%),
+      linear-gradient(135deg,var(--bg-1),var(--bg-2) 58%,#0b0b14);background-attachment:fixed}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.035;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+    body[data-theme="light"]{color-scheme:light;--bg-1:#f3f0ea;--bg-2:#e6e0d7;--surface:rgba(255,255,255,.64);
+      --surface-border:rgba(42,35,28,.13);--text-primary:#211d1a;--text-secondary:rgba(33,29,26,.62);
+      --card-shadow:0 18px 48px rgba(60,43,25,.12);background:radial-gradient(ellipse at 8% 10%,rgba(255,107,53,.15),transparent 35%),
+      radial-gradient(ellipse at 92% 4%,rgba(247,197,72,.18),transparent 31%),linear-gradient(135deg,var(--bg-1),var(--bg-2))}
+    button{font:inherit}button:focus-visible{outline:2px solid var(--accent-2);outline-offset:4px}
+    .page-shell{position:relative;z-index:1;width:min(1200px,100%);margin:0 auto;padding:26px 28px 42px}
+    .topbar{display:flex;justify-content:flex-end;align-items:center;gap:10px;min-height:42px}
+    .theme-toggle{display:inline-flex;align-items:center;gap:9px;padding:10px 15px;border-radius:999px;border:1px solid var(--surface-border);
+      color:var(--text-primary);background:var(--surface);backdrop-filter:blur(20px) saturate(140%);cursor:pointer;transition:.2s}
+    .theme-toggle:hover{border-color:rgba(255,107,53,.55);transform:translateY(-1px)}
+    .hero{text-align:center;padding:38px 0 35px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--text-secondary);font-size:12px;margin-bottom:13px}
+    .eyebrow:before,.eyebrow:after{content:"";width:24px;height:1px;background:linear-gradient(90deg,transparent,var(--accent-1))}
+    .eyebrow:after{transform:rotate(180deg)}
+    h1{margin:0;font-size:clamp(32px,5vw,54px);line-height:1.35;font-weight:700;background:linear-gradient(100deg,#f7c548 5%,#ff9a43 48%,#ff6b35 90%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 26px rgba(255,107,53,.12))}
+    .hero p{margin:12px 0 22px;color:var(--text-secondary);font-size:15px;font-weight:300}
+    .stats-pill{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;padding:10px 17px;border-radius:999px;
+      border:1px solid var(--surface-border);background:var(--surface);color:var(--text-secondary);font-size:12px;backdrop-filter:blur(20px) saturate(140%)}
+    .stats-pill strong{color:var(--text-primary);font-weight:600}.stats-dot{width:5px;height:5px;background:var(--accent-1);border-radius:50%;box-shadow:0 0 12px var(--accent-glow)}
+    .status-message{display:none;margin:0 auto 25px;max-width:650px;padding:17px 20px;border-radius:16px;border:1px solid var(--surface-border);
+      background:var(--surface);color:var(--text-secondary);text-align:center;line-height:1.9;font-size:13px}
+    .status-message.visible{display:block}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:22px}
+    .video-card{min-width:0;overflow:hidden;border-radius:var(--radius);border:1px solid var(--surface-border);background:var(--surface);
+      box-shadow:var(--card-shadow);cursor:pointer;text-align:right;color:inherit;padding:0;position:relative;isolation:isolate;
+      backdrop-filter:blur(20px) saturate(140%);transition:transform .28s,border-color .28s,box-shadow .28s,background .28s;
+      animation:fadeUp .55s both;animation-delay:var(--delay,0ms)}
+    .video-card:not(.locked):hover{transform:translateY(-6px);border-color:rgba(255,107,53,.58);box-shadow:0 22px 58px rgba(0,0,0,.34),0 0 26px rgba(255,107,53,.12)}
+    .thumbnail{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;
+      background:radial-gradient(ellipse at 50% 45%,rgba(255,107,53,.18),transparent 44%),linear-gradient(135deg,#242238,#11111d 58%,#38251f)}
+    .thumbnail:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,7,13,.83),transparent 72%);z-index:1}
+    .thumbnail:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(247,197,72,.12);
+      box-shadow:0 0 0 22px rgba(247,197,72,.025),0 0 0 48px rgba(255,107,53,.025);pointer-events:none}
+    /* دکمه پخش با مرکزیت دقیق مستقل از جهت RTL */
+    .play-button{position:absolute;left:50%;top:50%;z-index:2;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+      transform:translate(-50%,-50%);background:linear-gradient(135deg,var(--accent-2),var(--accent-1));color:#17111a;
+      box-shadow:0 8px 28px rgba(255,107,53,.3),inset 0 1px 1px rgba(255,255,255,.5);transition:transform .25s;font-size:19px;line-height:1;padding:0}
+    .play-glyph{display:block;transform:translateX(-1px);line-height:1}
+    .video-card:not(.locked):hover .play-button{transform:translate(-50%,-50%) scale(1.12)}
+    .number-badge,.locked-badge{position:absolute;z-index:3;top:12px;font-size:11px;padding:5px 9px;border-radius:999px;backdrop-filter:blur(10px)}
+    .number-badge{right:12px;background:rgba(7,7,13,.62);color:#fff;border:1px solid rgba(255,255,255,.12);direction:ltr}
+    .locked-badge{left:12px;color:#ffc19f;border:1px solid rgba(255,107,53,.45);background:rgba(20,13,17,.76)}
+    .card-body{padding:17px 18px 19px}.card-title{margin:0 0 5px;font-size:15px;font-weight:600;color:var(--text-primary)}
+    .card-subtitle{margin:0;font-size:12px;color:var(--text-secondary);font-weight:300;direction:rtl;text-align:right}
+
+    .video-card{cursor:default}
+    .video-card-trigger{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;text-align:right;cursor:pointer;border-radius:inherit;overflow:hidden}
+    .video-card-trigger:focus-visible{outline:2px solid var(--accent-2);outline-offset:-4px}
+    .card-actions{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 16px}
+    .download-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:7px 11px;border:1px solid var(--surface-border);border-radius:10px;background:rgba(255,255,255,.035);color:var(--text-primary);font-size:11px;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+    .download-link::before{content:"↓";font-size:14px;color:var(--accent-2)}
+    .download-link:hover{background:rgba(255,107,53,.11);border-color:rgba(255,107,53,.5);transform:translateY(-1px)}
+    .retry-button{margin-top:12px;padding:8px 16px;border:1px solid rgba(255,107,53,.5);border-radius:10px;background:rgba(255,107,53,.1);color:var(--text-primary);cursor:pointer}
+    .locked{opacity:.65;cursor:not-allowed}.locked .thumbnail{background:repeating-linear-gradient(135deg,rgba(255,255,255,.055) 0 8px,rgba(0,0,0,.08) 8px 16px),linear-gradient(135deg,#24232d,#12121b)}
+    .locked:hover{transform:none;border-color:var(--surface-border);box-shadow:var(--card-shadow)}
+    .lock-icon{position:relative;z-index:2;font-size:29px;opacity:.82;filter:grayscale(1)}
+    .locked .card-subtitle{direction:rtl;text-align:right}
+
+    .library-tools{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:12px;align-items:center;margin:0 0 22px;padding:14px;border:1px solid var(--surface-border);border-radius:18px;background:var(--surface);backdrop-filter:blur(18px)}
+    .search-wrap{position:relative;min-width:0}.search-wrap input{width:100%;min-height:44px;padding:10px 42px 10px 14px;border:1px solid var(--surface-border);border-radius:12px;background:rgba(0,0,0,.12);color:var(--text-primary);font:inherit;font-size:13px;outline:none}
+    body[data-theme="light"] .search-wrap input{background:rgba(255,255,255,.7)}.search-wrap input:focus{border-color:var(--accent-1);box-shadow:0 0 0 3px rgba(255,107,53,.12)}.search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);opacity:.65;pointer-events:none}.tool-select,.refresh-button{min-height:44px;border:1px solid var(--surface-border);border-radius:12px;background:var(--surface);color:var(--text-primary);padding:8px 12px;font:inherit;font-size:12px;cursor:pointer}.refresh-button:hover,.tool-select:focus-visible{border-color:var(--accent-1)}.refresh-button{display:inline-flex;align-items:center;gap:8px;justify-content:center}.refresh-button[disabled]{opacity:.55;cursor:wait}.result-line{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 14px;color:var(--text-secondary);font-size:12px}.result-line strong{color:var(--text-primary)}.empty-results{grid-column:1/-1;text-align:center;padding:44px 18px;border:1px dashed var(--surface-border);border-radius:18px;color:var(--text-secondary);line-height:2}.empty-results strong{display:block;color:var(--text-primary);font-size:15px;margin-bottom:6px}.skeleton-card{height:260px;border-radius:var(--radius);border:1px solid var(--surface-border);background:linear-gradient(100deg,var(--surface) 20%,rgba(255,255,255,.09) 40%,var(--surface) 60%);background-size:200% 100%;animation:shimmer 1.3s linear infinite}.connection-pill{display:inline-flex;align-items:center;gap:6px}.connection-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:#65d6a0;box-shadow:0 0 9px rgba(101,214,160,.5)}
+    @keyframes shimmer{to{background-position:-200% 0}}.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+    @media(max-width:680px){.library-tools{grid-template-columns:1fr 1fr}.search-wrap{grid-column:1/-1}.tool-select,.refresh-button{width:100%}.result-line{align-items:flex-start;flex-direction:column;gap:4px}}
+    @media(prefers-reduced-motion:reduce){.skeleton-card{animation:none}}
+
+    footer{text-align:center;padding:42px 0 8px;color:var(--text-secondary);font-size:11px;font-weight:300}
+    .modal{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(4,4,10,.78);backdrop-filter:blur(16px)}
+    .modal.active{display:flex;animation:modalFade .2s ease both}
+    .modal-dialog{width:min(920px,100%);max-height:92vh;overflow:auto;border-radius:22px;border:1px solid rgba(255,255,255,.14);
+      background:rgba(21,20,31,.97);box-shadow:0 28px 100px rgba(0,0,0,.55),0 0 38px rgba(255,107,53,.08)}
+    body[data-theme="light"] .modal-dialog{background:rgba(248,245,239,.98);border-color:rgba(40,30,20,.15)}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:17px 20px;border-bottom:1px solid var(--surface-border)}
+    .modal-title{margin:0;font-size:15px;font-weight:600;line-height:1.8;overflow-wrap:anywhere}
+    .close-button{flex:0 0 auto;width:38px;height:38px;border-radius:12px;border:1px solid var(--surface-border);background:var(--surface);color:var(--text-primary);cursor:pointer;font-size:22px;display:grid;place-items:center}
+    .close-button:hover{background:rgba(255,107,53,.14);border-color:rgba(255,107,53,.45)}
+    .player-wrap{padding:18px}
+    video{display:block;width:100%;max-height:70vh;aspect-ratio:16/9;object-fit:contain;background:#000;border-radius:13px}
+    .player-error{display:none;margin:12px 0 0;padding:12px 14px;border:1px solid rgba(255,107,53,.35);border-radius:12px;background:rgba(255,107,53,.08);color:var(--text-primary);font-size:12px;line-height:1.9}
+    .player-error.visible{display:block}
+    .player-note{margin:12px 2px 0;font-size:11px;color:var(--text-secondary)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes modalFade{from{opacity:0}to{opacity:1}}
+    @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+    @media(max-width:640px){.page-shell{padding:16px 15px 28px}.hero{padding:30px 0 27px}h1{font-size:24px}.hero p{font-size:13px;line-height:1.9}
+      .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}.play-button{width:44px;height:44px;font-size:17px}
+      .card-body{padding:13px 13px 15px}.card-actions{padding:0 12px 12px;gap:6px}.download-link{font-size:10px;padding:7px 9px}.card-title{font-size:13px}.card-subtitle{font-size:10px}.modal{padding:10px}
+      .modal-dialog{border-radius:17px}.modal-header{padding:13px}.modal-title{font-size:13px}.player-wrap{padding:10px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="topbar">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="تغییر تم صفحه"><span id="themeIcon" aria-hidden="true">☼</span><span id="themeLabel">تم روشن</span></button>
+    </div>
+    <header class="hero">
+      <div class="eyebrow">کتابخانه ویدیویی آموزشی</div>
+      <h1>آرشیو کلاس‌ها</h1>
+      <p>ویدیوها مستقیماً از مخزن آموزشی بارگذاری می‌شوند</p>
+      <div class="stats-pill" aria-live="polite"><span class="stats-dot" aria-hidden="true"></span>
+        <span>تعداد فیلم‌های موجود: <strong id="videoCount">۰</strong></span><span aria-hidden="true">—</span>
+        <span>آخرین شماره: <strong id="lastNumber">۰</strong></span>
+      </div>
+    </header>
+    <main>
+      <div class="status-message visible" id="statusMessage" role="status" aria-live="polite">در حال دریافت فهرست کلاس‌ها…</div>
+      <section class="library-tools" aria-label="ابزارهای جستجو و مرتب‌سازی">
+        <label class="search-wrap"><span class="search-icon" aria-hidden="true">⌕</span><span class="sr-only">جستجوی کلاس</span><input id="searchInput" type="search" inputmode="numeric" autocomplete="off" placeholder="جستجوی شماره کلاس…" aria-label="جستجوی شماره کلاس"></label>
+        <label><span class="sr-only">فیلتر کلاس‌ها</span><select class="tool-select" id="filterSelect" aria-label="فیلتر کلاس‌ها"><option value="all">همه کلاس‌ها</option><option value="python">دارای فایل پایتون</option></select></label>
+        <button class="refresh-button" id="refreshButton" type="button"><span aria-hidden="true">↻</span> به‌روزرسانی</button>
+      </section>
+      <div class="result-line"><span id="resultSummary" aria-live="polite">در حال آماده‌سازی…</span><span class="connection-pill" id="sourceStatus">اتصال به مخزن</span></div>
+      <section class="grid" id="videoGrid" aria-label="فهرست کلاس‌های موجود"></section>
+    </main>
+    <footer>آرشیو کلاس‌ها <span aria-hidden="true">·</span> فضای یادگیری شما</footer>
+  </div>
+
+  <div class="modal" id="playerModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header"><h2 class="modal-title" id="modalTitle">پخش کلاس</h2>
+        <button class="close-button" id="closeModal" type="button" aria-label="بستن پخش‌کننده">×</button>
+      </div>
+      <div class="player-wrap">
+        <video id="videoPlayer" controls playsinline preload="metadata">مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.</video>
+        <div class="player-error" id="playerError" role="alert"></div>
+        <p class="player-note">اگر پخش خودکار توسط مرورگر مسدود شد، دکمه پخش را در کنترل‌های ویدیو انتخاب کنید.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    "use strict";
+    const MAX_CLASS = 70;
+    const REPO_API = "https://api.github.com/repos/mmt315/PythonClassData/contents/";
+    const PAGES_BASE = "https://mmt315.github.io/PythonClassData/";
+    // پس از استقرار Worker کلادفلر، آدرس آن را اینجا بگذارید؛ در غیر این صورت API عمومی GitHub استفاده می‌شود.
+    const API_BASE = "https://py-class.game-m-m-t-s0.workers.dev";
+    const CACHE_KEY = "classArchiveRepositoryCacheV3";
+    const CACHE_TTL = 5 * 60 * 1000;
+    const $ = (id) => document.getElementById(id);
+    const videoGrid = $("videoGrid"), videoCount = $("videoCount"), lastNumber = $("lastNumber");
+    const statusMessage = $("statusMessage"), modal = $("playerModal"), modalTitle = $("modalTitle");
+    const videoPlayer = $("videoPlayer"), playerError = $("playerError"), closeModalButton = $("closeModal");
+    const themeToggle = $("themeToggle"), themeIcon = $("themeIcon"), themeLabel = $("themeLabel");
+    const searchInput = $("searchInput"), filterSelect = $("filterSelect"), refreshButton = $("refreshButton");
+    const resultSummary = $("resultSummary"), sourceStatus = $("sourceStatus");
+    const faNumber = (value) => new Intl.NumberFormat("fa-IR").format(value);
+    const fileUrl = (num) => `${PAGES_BASE}class_${num}.mp4`;
+    const pythonUrl = (num) => `${PAGES_BASE}class_${num}.py`;
+    let repositoryData = { videos: [], pythonFiles: [] };
+    let lastFocusedElement = null;
+    let requestController = null;
+
+    function showStatus(message, visible = true) {
+      statusMessage.textContent = message;
+      statusMessage.classList.toggle("visible", visible);
+    }
+    function setLoading(loading) {
+      refreshButton.disabled = loading;
+      refreshButton.innerHTML = loading ? '<span aria-hidden="true">◌</span> در حال دریافت…' : '<span aria-hidden="true">↻</span> به‌روزرسانی';
+    }
+    function renderSkeletons() {
+      videoGrid.replaceChildren();
+      for (let i = 0; i < 6; i++) { const skeleton = document.createElement("div"); skeleton.className = "skeleton-card"; skeleton.setAttribute("aria-hidden", "true"); videoGrid.appendChild(skeleton); }
+    }
+    function makeDownloadLink(label, url, filename, extraClass) {
+      const link = document.createElement("a");
+      link.className = `download-link ${extraClass || ""}`.trim(); link.href = url;
+      link.setAttribute("download", filename); link.setAttribute("aria-label", label); link.textContent = label;
+      link.rel = "noopener noreferrer"; link.addEventListener("click", event => event.stopPropagation());
+      return link;
+    }
+    function createCard(num, index, hasPython) {
+      const card = document.createElement("article"); card.className = "video-card";
+      card.style.setProperty("--delay", `${Math.min(index * 25, 400)}ms`);
+      const trigger = document.createElement("button"); trigger.type = "button"; trigger.className = "video-card-trigger";
+      trigger.setAttribute("aria-label", `پخش کلاس شماره ${faNumber(num)}`);
+      const thumbnail = document.createElement("div"); thumbnail.className = "thumbnail";
+      const badge = document.createElement("span"); badge.className = "number-badge"; badge.textContent = `#${faNumber(num)}`;
+      const play = document.createElement("span"); play.className = "play-button"; play.setAttribute("aria-hidden", "true");
+      const glyph = document.createElement("span"); glyph.className = "play-glyph"; glyph.textContent = "▶"; play.appendChild(glyph);
+      const body = document.createElement("div"); body.className = "card-body";
+      const title = document.createElement("h2"); title.className = "card-title"; title.textContent = `کلاس شماره ${faNumber(num)}`;
+      const subtitle = document.createElement("p"); subtitle.className = "card-subtitle"; subtitle.textContent = hasPython ? "ویدیو · فایل تمرین پایتون" : "ویدیو آموزشی";
+      thumbnail.append(badge, play); body.append(title, subtitle); trigger.append(thumbnail, body);
+      trigger.addEventListener("click", () => openPlayer(num));
+      const actions = document.createElement("div"); actions.className = "card-actions";
+      actions.appendChild(makeDownloadLink("دانلود ویدیو", fileUrl(num), `class_${num}.mp4`, "video-download"));
+      if (hasPython) actions.appendChild(makeDownloadLink("دانلود فایل پایتون", pythonUrl(num), `class_${num}.py`, "python-download"));
+      card.append(trigger, actions); return card;
+    }
+    function createLockedCard(num, index) {
+      const card = document.createElement("button"); card.type = "button"; card.className = "video-card locked";
+      card.style.setProperty("--delay", `${Math.min(index * 25, 400)}ms`); card.setAttribute("aria-label", `کلاس شماره ${faNumber(num)} قفل است`);
+      card.setAttribute("aria-disabled", "true");
+      const thumbnail = document.createElement("div"); thumbnail.className = "thumbnail";
+      const badge = document.createElement("span"); badge.className = "number-badge"; badge.textContent = `#${faNumber(num)}`;
+      const lockBadge = document.createElement("span"); lockBadge.className = "locked-badge"; lockBadge.textContent = "🔒 قفل";
+      const lock = document.createElement("span"); lock.className = "lock-icon"; lock.setAttribute("aria-hidden", "true"); lock.textContent = "🔒";
+      const body = document.createElement("div"); body.className = "card-body";
+      const title = document.createElement("h2"); title.className = "card-title"; title.textContent = `کلاس شماره ${faNumber(num)}`;
+      const subtitle = document.createElement("p"); subtitle.className = "card-subtitle"; subtitle.textContent = "به‌زودی…";
+      thumbnail.append(badge, lockBadge, lock); body.append(title, subtitle); card.append(thumbnail, body);
+      card.addEventListener("click", () => { if (card.animate) card.animate([{transform:"translateX(0)"},{transform:"translateX(-5px)"},{transform:"translateX(5px)"},{transform:"translateX(0)"}],{duration:300}); });
+      return card;
+    }
+    function renderCards() {
+      const query = searchInput.value.trim().replace(/[۰-۹]/g, d => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d))).replace(/[٠-٩]/g, d => String("٠١٢٣٤٥٦٧٨٩".indexOf(d)));
+      const filter = filterSelect.value;
+      const videos = repositoryData.videos.filter(num => (!query || String(num).includes(query)) && (filter !== "python" || repositoryData.pythonFiles.includes(num)));
+      videoGrid.replaceChildren();
+      if (!videos.length) {
+        const empty = document.createElement("div"); empty.className = "empty-results";
+        const strong = document.createElement("strong"); strong.textContent = repositoryData.videos.length ? "کلاسی پیدا نشد" : "هنوز ویدیویی در مخزن پیدا نشد";
+        const detail = document.createElement("span"); detail.textContent = repositoryData.videos.length ? "عبارت جستجو یا فیلتر را تغییر بده." : "نام فایل‌ها باید مانند class_1.mp4 باشد.";
+        empty.append(strong, detail); videoGrid.appendChild(empty);
+      } else {
+        videos.forEach((num, index) => videoGrid.appendChild(createCard(num, index, repositoryData.pythonFiles.includes(num))));
+        if (!query && filter === "all") {
+          const lastNum = repositoryData.videos[repositoryData.videos.length - 1];
+          if (lastNum < MAX_CLASS) videoGrid.appendChild(createLockedCard(lastNum + 1, videos.length));
+        }
+      }
+      resultSummary.textContent = `نمایش ${faNumber(videos.length)} از ${faNumber(repositoryData.videos.length)} کلاس`;
+    }
+    function readCache() {
+      try { const item = JSON.parse(localStorage.getItem(CACHE_KEY) || "null"); if (item && Date.now() - item.savedAt < CACHE_TTL && Array.isArray(item.videos) && Array.isArray(item.pythonFiles)) return item; } catch (_) {}
+      return null;
+    }
+    function saveCache(data) { try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ...data, savedAt: Date.now() })); } catch (_) {} }
+    async function fetchWithTimeout(url, options = {}, timeout = 10000) {
+      const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), timeout);
+      try { return await fetch(url, { ...options, signal: controller.signal }); } finally { clearTimeout(timer); }
+    }
+    async function fetchRepositoryFiles() {
+      let data;
+      if (API_BASE) {
+        const response = await fetchWithTimeout(`${API_BASE.replace(/\/$/, "")}/api/classes`, { headers: { "Accept": "application/json" }, cache: "no-cache" });
+        if (!response.ok) throw new Error(response.status === 429 ? "rate-limit" : "repository-unavailable");
+        data = await response.json();
+        if (!data || !Array.isArray(data.videos) || !Array.isArray(data.pythonFiles)) throw new Error("invalid-response");
+        return { videos: data.videos.filter(n => Number.isInteger(n) && n >= 1 && n <= MAX_CLASS).sort((a,b)=>a-b), pythonFiles: data.pythonFiles.filter(n => Number.isInteger(n) && n >= 1 && n <= MAX_CLASS).sort((a,b)=>a-b) };
+      }
+      const response = await fetchWithTimeout(REPO_API, { headers: { "Accept": "application/vnd.github+json" }, cache: "no-cache" });
+      if (!response.ok) throw new Error(response.status === 403 || response.status === 429 ? "rate-limit" : "repository-unavailable");
+      data = await response.json(); if (!Array.isArray(data)) throw new Error("invalid-response");
+      const videos = new Set(), pythonFiles = new Set();
+      for (const item of data) {
+        if (!item || item.type !== "file" || typeof item.name !== "string") continue;
+        const match = /^class_(\d{1,2})\.(mp4|py)$/i.exec(item.name); if (!match) continue;
+        const num = Number(match[1]); if (!Number.isInteger(num) || num < 1 || num > MAX_CLASS) continue;
+        (match[2].toLowerCase() === "mp4" ? videos : pythonFiles).add(num);
+      }
+      return { videos: [...videos].sort((a,b)=>a-b), pythonFiles: [...pythonFiles].sort((a,b)=>a-b) };
+    }
+    async function init({ force = false } = {}) {
+      if (requestController) requestController.abort();
+      setLoading(true); showStatus("در حال دریافت فهرست کلاس‌ها…"); sourceStatus.textContent = "در حال اتصال";
+      if (!repositoryData.videos.length) renderSkeletons();
+      if (!force) {
+        const cached = readCache();
+        if (cached) { repositoryData = { videos: cached.videos, pythonFiles: cached.pythonFiles }; updateStats(); renderCards(); showStatus("فهرست ذخیره‌شده نمایش داده شد؛ در حال بررسی به‌روزرسانی…"); }
+      }
+      try {
+        const data = await fetchRepositoryFiles(); repositoryData = data; saveCache(data); updateStats(); renderCards();
+        showStatus("فهرست کلاس‌ها با موفقیت به‌روز شد.", false); sourceStatus.textContent = API_BASE ? "اتصال پایدار · Worker" : "اتصال مستقیم به مخزن";
+      } catch (error) {
+        const cached = readCache();
+        if (!repositoryData.videos.length && cached) { repositoryData = { videos: cached.videos, pythonFiles: cached.pythonFiles }; updateStats(); renderCards(); }
+        const message = error?.message === "rate-limit" ? "محدودیت موقت درخواست‌های GitHub فعال شده؛ فهرست ذخیره‌شده در صورت وجود نمایش داده می‌شود." : "دریافت فهرست از مخزن ممکن نشد؛ اتصال اینترنت و عمومی بودن مخزن را بررسی کن.";
+        showStatus(message); sourceStatus.textContent = cached ? "حالت ذخیره‌شده" : "قطع اتصال";
+        const retry = document.createElement("button"); retry.type = "button"; retry.className = "retry-button"; retry.textContent = "تلاش دوباره"; retry.addEventListener("click", () => init({ force: true })); statusMessage.append(document.createElement("br"), retry);
+      } finally { setLoading(false); }
+    }
+    function updateStats() { videoCount.textContent = faNumber(repositoryData.videos.length); lastNumber.textContent = faNumber(repositoryData.videos.length ? repositoryData.videos[repositoryData.videos.length - 1] : 0); }
+    function openPlayer(num) {
+      lastFocusedElement = document.activeElement; playerError.textContent = ""; playerError.classList.remove("visible");
+      modalTitle.textContent = `کلاس شماره ${faNumber(num)}`; videoPlayer.pause(); videoPlayer.removeAttribute("src"); videoPlayer.load();
+      videoPlayer.src = fileUrl(num); videoPlayer.load(); modal.classList.add("active"); modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden"; closeModalButton.focus();
+      const playPromise = videoPlayer.play(); if (playPromise?.catch) playPromise.catch(() => {});
+    }
+    function closePlayer() {
+      if (!modal.classList.contains("active")) return;
+      modal.classList.remove("active"); modal.setAttribute("aria-hidden", "true"); videoPlayer.pause(); videoPlayer.removeAttribute("src"); videoPlayer.load();
+      document.body.style.overflow = ""; if (lastFocusedElement?.focus) lastFocusedElement.focus();
+    }
+    videoPlayer.addEventListener("error", () => {
+      if (!modal.classList.contains("active")) return;
+      const code = videoPlayer.error?.code || 0;
+      playerError.textContent = code === 4 ? "فرمت یا کدک ویدیو پشتیبانی نمی‌شود؛ مطمئن شو فایل با H.264 و AAC کدگذاری شده است." : "ویدیو بارگذاری نشد. اتصال، مسیر فایل و عمومی بودن مخزن را بررسی کن.";
+      playerError.classList.add("visible");
+    });
+    closeModalButton.addEventListener("click", closePlayer); modal.addEventListener("click", e => { if (e.target === modal) closePlayer(); });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && modal.classList.contains("active")) closePlayer();
+      if (event.key === "Tab" && modal.classList.contains("active")) {
+        const focusable = [...modal.querySelectorAll('button, video, a[href], [tabindex]:not([tabindex="-1"])')].filter(el => !el.disabled);
+        if (!focusable.length) return; const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+    function applyTheme(theme) {
+      const light = theme === "light"; document.body.dataset.theme = light ? "light" : "dark";
+      themeIcon.textContent = light ? "☾" : "☼"; themeLabel.textContent = light ? "تم تاریک" : "تم روشن";
+      themeToggle.setAttribute("aria-label", light ? "فعال‌کردن تم تاریک" : "فعال‌کردن تم روشن");
+    }
+    let savedTheme = "dark"; try { savedTheme = localStorage.getItem("classArchiveTheme") || "dark"; } catch (_) {}
+    applyTheme(savedTheme === "light" ? "light" : "dark");
+    themeToggle.addEventListener("click", () => { const next = document.body.dataset.theme === "light" ? "dark" : "light"; applyTheme(next); try { localStorage.setItem("classArchiveTheme", next); } catch (_) {} });
+    searchInput.addEventListener("input", renderCards); filterSelect.addEventListener("change", renderCards); refreshButton.addEventListener("click", () => init({ force: true }));
+    init().catch(() => { showStatus("بارگذاری فهرست ناموفق بود. دوباره تلاش کن."); setLoading(false); });
+  </script>
+</body>
+</html>
